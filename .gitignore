@@ -1,0 +1,5 @@
+__pycache__
+login_details.py
+*.csv
+src-dest
+s-nail.rc

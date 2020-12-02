@@ -1,0 +1,5 @@
+set smtp=smtp://dest:25
+
+set tls-rand-file=/tmp/rnd
+
+alias speedchecker_admin  'Me'<someone@gmail.com>

@@ -1,0 +1,2 @@
+# bind-ip-address file-to-save-to url-to-pull-down
+192.168.0.11 my-stats.csv https://www.dropbox.com/s/xxxxxxxxxxxxx/P10000000.JPG?dl=1
