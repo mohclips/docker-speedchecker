@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#set -x
+
 LOC=/opt/speedchecker
 EMAIL="speedchecker_admin"
 
@@ -45,6 +47,7 @@ IP=arr[2] || 0;
 # 2013-08-21 18:09:18 (73.4 KB/s) - /dev/null saved [1853752]
 # 2013-09-11 06:53:17 (577 KB/s) - /dev/null saved [1872976]
 # 2018-06-11 17:10:57 (2.11 MB/s) - ‘/dev/null’ saved [5092352/5092352]
+# 2023-02-18 13:08:12 (18.2 MB/s) - ‘/dev/null’ saved [5092352/5092352]
 
 #print "saved: "$0 > "/dev/stderr"
 
@@ -83,8 +86,8 @@ time=$2;
 }
 
 END { 
-
-	if (avg_speed>30000) {
+        # MAX speed we expect to get
+	if (avg_speed>1000000){
 		size=0
 	}
 
@@ -93,15 +96,15 @@ END {
 		print timestamp","IP","avg_speed","size","time
 		exit 0
 	} else {
-		print "# "wtime" we got an error" > "/dev/stderr"
-		print "# "wtime" we got an error"	
+		print "# "wtime" we got an error",timestamp","IP","avg_speed","size","time > "/dev/stderr"
+		print "# "wtime" we got an error",timestamp","IP","avg_speed","size","time
 		exit 1
 	}
 }
 ' >> $LOC/$FILE
 	ERR=$?
 	if [[ "$ERR" -ne "0" ]] ; then
-		tail $LOC/$FILE | s-nail -s "speedchecker error" $EMAIL
+		tail $LOC/$FILE | s-nail -s "speedchecker error $ERR" $EMAIL
 
 		continue
 	fi
